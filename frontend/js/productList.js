@@ -4,16 +4,12 @@ const url = "http://localhost:3000/api/cameras";
 //elements selected
 const productsList = document.getElementById('productsList');
 
-async function allProductsList() {
-  await MakeRequest('GET', url)
+MakeRequest('GET', url)
     .then(products => {
       localStorage.setItem('products', JSON.stringify(products));
       createProductsView();
     })
     .catch(e => console.log(e));
-}
-
-allProductsList();
 
 function createProductsView() {
   const products = JSON.parse(localStorage.getItem('products'));
@@ -43,11 +39,11 @@ function createProductCard(product) {
   cardDescription.textContent = product.description;
   cardBody.appendChild(cardDescription);
 
-  const cardLink = document.createElement('a');
-  cardLink.className = 'btn btn-primary';
-  cardLink.setAttribute('href', '/product/' + product._id + '/');
-  cardLink.textContent = 'Buy now';
-  cardBody.appendChild(cardLink);
+  const cardButton = document.createElement('a');
+  cardButton.className = 'btn btn-primary';
+  cardButton.textContent = 'Find out more';
+  cardButton.setAttribute('href', `product.html?product=${product._id}`)
+  cardBody.appendChild(cardButton);
 
   card.appendChild(cardBody);
   productsList.appendChild(card)
