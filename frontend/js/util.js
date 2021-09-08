@@ -22,7 +22,7 @@ function updateCartBadge() {
     cart = 0;
   }
 
-  document.getElementById('cartBadge').innerText = cart;
+  document.getElementById('cartBadge').innerText = isNaN(cart) ? 0 : cart;
   return cart;
 }
 
@@ -48,4 +48,60 @@ function getCartPrice(cart) {
   }, 0).toLocaleString();
 }
 
-export { updateCartBadge, addAlert, adjustCart, getCartPrice };
+function isString(input, error) {
+  if (!/[^a-zA-Z]/.test(input.value) && input.value.length > 1) {
+    document.getElementById(error).textContent = '';
+    if (input.classList.contains('is-invalid')) {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+    } else {
+      input.classList.add('is-valid');
+    }
+    return true;
+  }
+
+  input.classList.remove('is-valid');
+  input.classList.add('is-invalid');
+  document.getElementById(error).textContent = "Make sure you enter correct value.";
+  return false
+}
+
+function isAddress(input, error) {
+  const regex = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
+  if (regex.test(input.value) && input.value.length > 5) {
+    document.getElementById(error).textContent = '';
+    if (input.classList.contains('is-invalid')) {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+    } else {
+      input.classList.add('is-valid');
+    }
+    return true;
+  }
+
+  input.classList.remove('is-valid');
+  input.classList.add('is-invalid');
+  document.getElementById(error).textContent = "Make sure you enter a correct address.";
+  return false
+}
+
+function isEmail(input, error) {
+  const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (regex.test(input.value) && input.value.length > 7) {
+    document.getElementById(error).textContent = '';
+    if (input.classList.contains('is-invalid')) {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+    } else {
+      input.classList.add('is-valid');
+    }
+    return true;
+  }
+
+  input.classList.remove('is-valid');
+  input.classList.add('is-invalid');
+  document.getElementById(error).textContent = "Make sure you enter a correct email address.";
+  return false
+}
+
+export { updateCartBadge, addAlert, adjustCart, getCartPrice, isString, isAddress, isEmail };

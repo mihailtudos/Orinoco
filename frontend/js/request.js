@@ -7,7 +7,7 @@ function MakeRequest(method, url, data) {
         if (request.status === 201 || request.status === 200) {
           resolve(JSON.parse(request.response));
         } else {
-          reject('Something went wrong!');
+          reject('Something went wrong! ' + request.response );
         }
       }
     };

@@ -13,7 +13,9 @@ MakeRequest('get', url)
     productItem = product;
     createProductView(product)
   })
-  .catch(e => console.log(e));
+  .catch(e => {
+    addAlert('Something went wrong please try again later or check our connection.', 'danger');
+  });
 
 function createProductView(product) {
   const productDescriptionSection = document.querySelector('.product-description');

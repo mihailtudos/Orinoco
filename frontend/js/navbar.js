@@ -20,9 +20,7 @@ header.innerHTML = `
                 </ul>
                 <a href="cart.html" class="position-relative text-white">
                     <i class="fas fa-shopping-cart display-6"></i>
-                    <span id="cartBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        
-                    </span>
+                    <span id="cartBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
                 </a>
             </div>
         </div>

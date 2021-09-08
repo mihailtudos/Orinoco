@@ -1,5 +1,7 @@
 import MakeRequest from "./request.js";
+import {addAlert} from "./util.js";
 const url = "http://localhost:3000/api/cameras";
+
 
 //elements selected
 const productsList = document.getElementById('productsList');
@@ -9,7 +11,9 @@ MakeRequest('GET', url)
       localStorage.setItem('products', JSON.stringify(products));
       createProductsView();
     })
-    .catch(e => console.log(e));
+    .catch(e => {
+      addAlert('Something went wrong please try again later or check our connection.', 'danger');
+    });
 
 function createProductsView() {
   const products = JSON.parse(localStorage.getItem('products'));
